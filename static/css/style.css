@@ -1,0 +1,48 @@
+body {
+	background-color: #C3DFEB;
+	text-align: center;
+	margin: 0;
+	border: 0;
+	padding: 0;
+}
+
+#container {
+	background-color: #fff;
+	width: 1000px;
+	min-height: 500px;
+	margin: 0 auto;
+	text-align: left;
+	font-family: Tahoma;
+}
+
+#container h1 {
+	font-weight: normal;
+	text-align: center;
+	margin: 0 auto;
+	width: 90%;
+	padding: 0 5%;
+	font-size: 35px;
+	line-height: 80px;
+	float: left;
+}
+
+.row {
+	min-height: 200px;
+	width: 98%;
+	padding: 0 1%;
+	float: left;
+}
+
+.col2 {
+	width: 48%;
+	padding: 0 1%;
+	float: left;
+}
+
+table.form {
+
+}
+
+table.form th {
+	
+}
