@@ -1,0 +1,10 @@
+#Options +FollowSymLinks
+Options +SymLinksIfOwnerMatch
+Options +Indexes
+RewriteEngine On 
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteBase /cs4400/
+RewriteRule ^([A-Za-z0-9_/.-]+)?/?$ index.php?p=$1
