@@ -19,8 +19,6 @@ function db($key = 'default')
 	return site()->db($key);
 }
 
-
-include('functions.php');
 include('database.class.php');
 
 include('table.class.php');

@@ -11,7 +11,7 @@ define('COOKIE_DOMAIN', '');
 define('SITE_NAME', 'Apartment Manager');
 define('SITE_DESCRIPTION', 'A CS 4400 Project ');
 
-define('SITE_PATH', '/cs4400/');
+define('SITE_PATH', '/CS4400Apartment_Rental/');
 define('DOC_ROOT', $_SERVER['DOCUMENT_ROOT'] . SITE_PATH);
 
 define('ENCRYPTION_KEY', 'Rb[@SLxL?H#+LXl]&OyOw[[@qmBO(D&Zzs^~bRrvQ_8R+yER<T)CP^W)Ht(DU"nomu<Z1SwLqC6[0C?Zr:8"I#nho');
