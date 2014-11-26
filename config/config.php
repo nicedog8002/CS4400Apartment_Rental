@@ -20,7 +20,7 @@ define('ENCRYPTION_KEY', 'Rb[@SLxL?H#+LXl]&OyOw[[@qmBO(D&Zzs^~bRrvQ_8R+yER<T)CP^
 global $db_settings; 
 $db_settings['default']['host'] =  'localhost';
 $db_settings['default']['db'] = 'cs4400';
-$db_settings['default']['user'] = 'root';
+$db_settings['default']['user'] = 'cs4400';
 $db_settings['default']['pass'] = '';
 
 ?>

@@ -7,7 +7,9 @@ $Password2 = $_POST['password2'];
 
 if ($_POST['submit']) {
 	// db() is a custom function written to abstract PHP queries
-	if ($Password2 != $Password) {
+	if ($Password == "" || $Username == "") {
+		$_SESSION['error'] = "Please complete all fields. ";
+	} else if ($Password2 != $Password) {
 		$_SESSION['error'] = "Your passwords are different!";
 	} else {
 		$query = "INSERT INTO User (Username, Password) VALUES ('$Username', '$Password')";

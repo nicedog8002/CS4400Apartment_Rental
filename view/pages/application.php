@@ -1,9 +1,9 @@
 <h2>Prospective Resident Application Form</h2>
-	<form id="login" action="home" method="post">
+	<form id="application" action="application" method="post">
 		<table class="form">
 			<tr>
-				<th><label for="loginName">Name</label></th>
-				<td><input type="text" id="loginName" name="name" /></td>
+				<th><label for="name">Name</label></th>
+				<td><input type="text" id="name" name="name" /></td>
 			</tr>
 			<tr>
 				<th><label for="dateOfBirth">Date of Birth</label></th>
@@ -54,20 +54,30 @@
 				<td><input type="text" id="income" name="income" /></td>
 			</tr>
 			<tr>
-				<th><label for="income">Category of Apartment</label></th>
-				<td><input type="text" id="income" name="income" /></td>
+				<th><label for="category">Category of Apartment</label></th>
+				<td>
+					<select id="category" name="category">
+						<?php 
+						print_r($Categories);
+						$Categories = db()->fetchMany("SELECT DISTINCT Category FROM Apartment");
+						foreach ($Categories as $cat) {
+							echo '<option value="' . $cat['Category'] . '">' . $cat['Category'] . '</option>';
+						}
+						?>
+					</select>
+				</td>
 			</tr>
 			<tr>
-				<th><label for="income">Monthly Rent</label></th>
-				<td><input type="text" id="income" name="income" /></td>
+				<th><label for="rent">Monthly Rent</label></th>
+				<td><input type="text" id="rent" name="rent" /></td>
 			</tr>
 			<tr>
 				<th><label for="movein">Preferred Move-In Date</label></th>
 				<td><input type="text" id="movein" name="movein" class="datepicker" /></td>
 			</tr>
 			<tr>
-				<th><label for="income">Lease Term</label></th>
-				<td><input type="text" id="income" name="income" /></td>
+				<th><label for="lease">Lease Term</label></th>
+				<td><input type="text" id="lease" name="lease" /></td>
 			</tr>
 			<tr>
 				<th><label for="prevresidence">Previous Residence Address</label></th>
@@ -76,7 +86,7 @@
 			<tr class="submit">
 				<td></td>
 				<td>
-					<input type="submit" value="Submit Application" />
+					<input type="submit" value="Submit Application" name="submit" />
 				</td>
 			</tr>
 		</table>

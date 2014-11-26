@@ -16,7 +16,8 @@ class Database
 		return $this->connection; 
 	}
 
-	public function error(){
+	public function error()
+	{
 		return $this->connection()->error; 
 	}
 
@@ -27,7 +28,20 @@ class Database
 		return mysqli_query($this->connection(), $query);
 	}
 
-	public function fetch($query){
-		return mysqli_fetch_assoc($this->query($query));
+	public function fetch($res) 
+	{
+		if (is_string($res)) {
+			$res = $this->query($res);
+		}
+		return mysqli_fetch_assoc($res);
+	}
+
+	public function fetchMany($query) 
+	{
+		$res = $this->query($query);
+		while ($row = $this->fetch($res)) {
+			$arr[] = $row;
+		}
+		return $arr;
 	}
 }
