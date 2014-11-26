@@ -5,6 +5,10 @@ class Database
 	public function __construct($host, $user, $pass, $db)
 	{
 		$this->connection = new mysqli($host, $user, $pass, $db); 
+		if ($this->connection->connect_errno) {
+			echo "NOTE: Your MySQL connection is currently not working. " 
+				. $this->connection->connect_errno;
+		}
 	}
 
 	public function connection()

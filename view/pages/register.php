@@ -1,5 +1,5 @@
 <h2>Register an Account</h2>
-<form id="register" action="application" method="post">
+<form id="register" action="register" method="post">
 	<table class="form">
 		<tr>
 			<th><label for="registerUsername">Username</label></th>
@@ -16,7 +16,7 @@
 		<tr class="submit">
 			<td></td>
 			<td>
-				<input type="submit" value="Register" />
+				<input type="submit" value="Register" name="submit" />
 			</td>
 		</tr>
 	</table>

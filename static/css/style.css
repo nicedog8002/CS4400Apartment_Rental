@@ -39,6 +39,20 @@ body {
 	float: left;
 }
 
+.error {
+	font-color: #ff0000;
+	width: 100%;
+	float: left;
+	min-height: 20px;
+}
+
+.notice {
+	width: 100%;
+	float: left;
+	min-height: 20px;
+}
+
+
 table.form {
 
 }

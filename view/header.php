@@ -23,3 +23,15 @@
 		<h1>
 			<a href="<?php echo  SITE_PATH; ?>">Sen, Daniel, Sherman, and Tiff's Apartment Management App</a>
 		</h1>
+
+<?php 
+  if ($_SESSION['error']) {
+    echo '<div class="error">' . $_SESSION['error'] . '</div>';
+    $_SESSION['error'] = false;
+  }
+
+  if ($_SESSION['notice']) {
+    echo '<div class="notice">' . $_SESSION['notice'] . '</div>';
+    $_SESSION['notice'] = false;
+  }
+?>
