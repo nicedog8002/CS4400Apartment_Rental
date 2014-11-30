@@ -15,7 +15,7 @@ if ($_POST['submit']) {
 				  	SELECT '$Username' AS Username, '$Password' AS Password) AS Temp
 				  WHERE NOT EXISTS (
 				  	SELECT * FROM User WHERE User.Username = '$Username')";
-		$result = db()->query($query);
+		$result = db()->numOfRows($query);
 		if (!$result) {
 			$_SESSION['error'] = "The username you picked is already taken. ";
 			// $_SESSION['error'] = "An error occurred. " . db()->error();

@@ -1,4 +1,4 @@
-<?php 
+<?php
 // The keys of the $_POST object are based on the "name" attribute
 // of the HTML forms which submit to this page
 $Username = $_POST['username'];
@@ -14,7 +14,7 @@ if ($_POST['submit']) {
 				  SELECT * FROM Resident WHERE Resident.Username = '$Username' AND Apt_No IS NOT NULL) 
 				  AND U.Username = '$Username' AND U.Password = '$Password';";
 	    echo $query;
-		$result = db()->query($query);
+		$result = db()->numOfRows($query);
 		if (!$result) {
 			$_SESSION['error'] = "Either the username of password is wrong";
 			// $_SESSION['error'] = "An error occurred. " . db()->error();
@@ -29,5 +29,4 @@ if ($_POST['submit']) {
 			exit;
 		}
 }
-
 ?>
