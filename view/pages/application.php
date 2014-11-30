@@ -19,15 +19,15 @@
 					?>
 					</select>
 					<select name="birthmonth">
-						<option value="1">January</option>
-						<option value="2">February</option>
-						<option value="3">March</option>
-						<option value="4">April</option>
-						<option value="5">May</option>
-						<option value="6">June</option>
-						<option value="7">July</option>
-						<option value="8">August</option>
-						<option value="9">September</option>
+						<option value="01">January</option>
+						<option value="02">February</option>
+						<option value="03">March</option>
+						<option value="04">April</option>
+						<option value="05">May</option>
+						<option value="06">June</option>
+						<option value="07">July</option>
+						<option value="08">August</option>
+						<option value="09">September</option>
 						<option value="10">October</option>
 						<option value="11">November</option>
 						<option value="12">December</option>
@@ -35,8 +35,9 @@
 					<select name="birthday">
 					<?php 
 					for ($i = 1; $i <= 31; $i++) {
+
 						echo '
-						<option value="' . $i . '">' . $i . '</option>';
+						<option value="' . ($i < 10 ? '0' : '') . $i . '">' . $i . '</option>';
 					}
 					?>
 					</select>
@@ -45,8 +46,8 @@
 			<tr>
 				<th><label for="gender">Gender</label></th>
 				<td>
-					<input type="radio" name="gender" id="male" value="m" /> <label for="male">Male</label> 
-					<input type="radio" name="gender" id="female" value="f" /> <label for="female">Female</label> 
+					<input type="radio" name="gender" id="male" value="male" /> <label for="male">Male</label> 
+					<input type="radio" name="gender" id="female" value="female" /> <label for="female">Female</label> 
 				</td>
 			</tr>
 			<tr>
@@ -58,8 +59,7 @@
 				<td>
 					<select id="category" name="category">
 						<?php 
-						print_r($Categories);
-						$Categories = db()->fetchMany("SELECT DISTINCT Category FROM Apartment");
+						$Categories = db()->fetchMany("SELECT DISTINCT Category FROM Apartment WHERE Category IS NOT NULL");
 						foreach ($Categories as $cat) {
 							echo '<option value="' . $cat['Category'] . '">' . $cat['Category'] . '</option>';
 						}
@@ -68,8 +68,13 @@
 				</td>
 			</tr>
 			<tr>
-				<th><label for="rent">Monthly Rent</label></th>
-				<td><input type="text" id="rent" name="rent" /></td>
+				<th><label for="maxrent">Max Rent</label></th>
+				<td><input type="text" id="maxrent" name="maxrent" /></td>
+			</tr>
+
+			<tr>
+				<th><label for="minrent">Min Rent</label></th>
+				<td><input type="text" id="minrent" name="minrent" /></td>
 			</tr>
 			<tr>
 				<th><label for="movein">Preferred Move-In Date</label></th>
@@ -77,11 +82,20 @@
 			</tr>
 			<tr>
 				<th><label for="lease">Lease Term</label></th>
-				<td><input type="text" id="lease" name="lease" /></td>
+				<td>
+					<select id="lease" name="lease">
+						<?php 
+						$Leases = db()->fetchMany("SELECT DISTINCT Lease_Term FROM Apartment WHERE Lease_Term IS NOT NULL");
+						foreach ($Leases as $lease) {
+							echo '<option value="' . $lease['Lease_Term'] . '">' . $lease['Lease_Term'] . ' Months</option>';
+						}
+						?>
+					</select>
+				</td>
 			</tr>
 			<tr>
-				<th><label for="prevresidence">Previous Residence Address</label></th>
-				<td><textarea name="prevresidence"></textarea></td>
+				<th><label for="prev_residence">Previous Residence Address</label></th>
+				<td><textarea name="prev_residence"></textarea></td>
 			</tr>
 			<tr class="submit">
 				<td></td>
