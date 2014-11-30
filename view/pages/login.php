@@ -1,5 +1,5 @@
 <h2>Login to Your Account</h2>
-	<form id="login" action="home" method="post">
+	<form id="login" action="login" method="post">
 		<table class="form">
 			<tr>
 				<th><label for="loginUsername">Username</label></th>
@@ -12,7 +12,7 @@
 			<tr class="submit">
 				<td></td>
 				<td>
-					<input type="submit" value="Login" />
+					<input type="submit" value="Login" name = "submit"/>
 				</td>
 			</tr>
 		</table>

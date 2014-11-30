@@ -22,9 +22,10 @@ class Database
 
 	public function query($query)
 	{
-		//echo $query; 
-
-		return mysqli_query($this->connection(), $query);
+		//change the number of affected rows after a query
+		$result = $this->connection()->query($query);
+		$num_rows = $this->connection()->affected_rows;
+		return $num_rows;
 	}
 
 	public function fetch($query){

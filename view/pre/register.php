@@ -10,8 +10,11 @@ if ($_POST['submit']) {
 	if ($Password2 != $Password) {
 		$_SESSION['error'] = "Your passwords are different!";
 	} else {
-		$query = "INSERT INTO User (Username, Password) VALUES ('$Username', '$Password')";
-
+		$query = "INSERT INTO User 
+				  SELECT * FROM (
+				  	SELECT '$Username' AS Username, '$Password' AS Password) AS Temp
+				  WHERE NOT EXISTS (
+				  	SELECT * FROM User WHERE User.Username = '$Username')";
 		$result = db()->query($query);
 		if (!$result) {
 			$_SESSION['error'] = "The username you picked is already taken. ";
@@ -29,6 +32,5 @@ if ($_POST['submit']) {
 		}
 	}
 }
-
 
 ?>
