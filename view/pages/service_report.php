@@ -9,7 +9,7 @@ $query = "SELECT  MONTHNAME(Date_Of_Request) AS Month, Issue_Type, AVG(DATEDIFF(
 			GROUP BY MONTHNAME(Date_Of_Request), Issue_Type
 			ORDER BY MONTH(Date_Of_Request) ASC;";
  ?>
- <? if ($result = db()->query($query)) { ?>
+ <?php if ($result = db()->query($query)) { ?>
     <table>
       <thead>
         <tr>
@@ -19,8 +19,9 @@ $query = "SELECT  MONTHNAME(Date_Of_Request) AS Month, Issue_Type, AVG(DATEDIFF(
          </tr>
       </thead>
       <tbody>
-        <? $month = ''; ?>
-        <? while ($row = $result->fetch_assoc()) { 
+        <?php 
+         $month = ''; 
+         while ($row = $result->fetch_assoc()) { 
         ?>
            <tr>
             <td><?php echo ($month == $row['Month']) ? '' : $row['Month']; ?></td>
@@ -28,12 +29,12 @@ $query = "SELECT  MONTHNAME(Date_Of_Request) AS Month, Issue_Type, AVG(DATEDIFF(
             <td><?php echo $row['Avg_Days_To_Resolve']; ?></td>
           </tr>
           <?php $month = $row['Month'];?>
-        <?
+        <?php
           }
         ?>
       <tbody>
     </table>
-<?
+<?php 
 }
 ?>
 

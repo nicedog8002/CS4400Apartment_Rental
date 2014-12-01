@@ -9,8 +9,7 @@ $query = "SELECT MONTHNAME(PR.Pref_Move) AS Lease_Month, A.Category, COUNT(A.Apt
           AND YEAR(PR.Pref_Move) = YEAR(now())
           GROUP BY MONTHNAME(PR.Pref_Move), A.Category 
           ORDER BY PR.Pref_Move ASC;";
- ?>
- <? if ($result = db()->query($query)) { ?>
+ if ($result = db()->query($query)) { ?>
     <table>
       <thead>
         <tr>
@@ -20,8 +19,9 @@ $query = "SELECT MONTHNAME(PR.Pref_Move) AS Lease_Month, A.Category, COUNT(A.Apt
          </tr>
       </thead>
       <tbody>
-        <? $month = ''; ?>
-        <? while ($row = $result->fetch_assoc()) { 
+        <?php 
+         $month = ''; 
+         while ($row = $result->fetch_assoc()) { 
         ?>
            <tr>
             <td><?php echo ($month == $row['Lease_Month']) ? '' : $row['Lease_Month']; ?></td>
@@ -29,12 +29,12 @@ $query = "SELECT MONTHNAME(PR.Pref_Move) AS Lease_Month, A.Category, COUNT(A.Apt
             <td align ="center"><?php echo $row['nums_of_Apartments']; ?></td>
           </tr>
           <?php $month = $row['Lease_Month'];?>
-        <?
+        <?php 
           }
         ?>
       <tbody>
     </table>
-<?
+<?php 
 }
 ?>
 

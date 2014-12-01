@@ -34,7 +34,7 @@ $query = "SELECT A.Apt_No AS Apartment_No, (P.Amount - A.Rent) AS Extra_Paid, (D
           AND (DAY(P.Date_Of_Payment) - 3) > 0;";
 $result = db()->query($query);
  ?>
- <? if (db()->numOfRows($query)){ ?>
+ <?php if (db()->numOfRows($query)){ ?>
  <P> The defaulted rent for <?php echo $monthName; ?> is: </p>
     <br>
     <table>
@@ -46,23 +46,23 @@ $result = db()->query($query);
          </tr>
       </thead>
       <tbody>
-        <? while ($row = $result->fetch_assoc()) { 
+        <?php while ($row = $result->fetch_assoc()) { 
         ?>
            <tr>
             <td align ="center"><?php echo $row['Apartment_No']; ?></td>
             <td align ="center"><?php echo $row['Extra_Paid']; ?></td>
             <td align ="center"><?php echo $row['Defaulted_By']; ?></td>
           </tr>
-        <?
+        <?php
           }
         ?>
       <tbody>
     </table>
-<?
+<?php
 } else {
 ?> 
   <P> No one defaulted the rent for <?php echo $monthName; ?> </p>
-<?
+<?php
 }
 ?>
 
