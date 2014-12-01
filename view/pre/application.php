@@ -3,6 +3,10 @@ if (!$_SESSION['username']) {
 	$_SESSION['error'] = "You must be registered before you can fill out a prospective resident form. ";
 	redirect('register');
 	exit;
+} else if (!$_SESSION['not_applied']) {
+	$_SESSION['error'] = "You've already applied for a prospective resident application. ";
+	redirect('index');
+	exit;
 }
 
 if ($_POST['submit']) {
@@ -44,10 +48,10 @@ if ($_POST['submit']) {
 											AND (P.Pref_Move <= now() + INTERVAL 2 MONTH)
 											AND EXISTS (SELECT Apt_No FROM Apartment AS A 
 										WHERE A.Category = P.Req_Cat 
-											AND A.Available_On <= P.Pref_Move
-											AND P.Monthly_Income >= 3*A.Rent
-											AND P.Min_Rent <= A.Rent
-											AND P.Max_Rent >= A.Rent)
+											AND A.Available_On <= P.Pref_Move 
+											AND P.Monthly_Income >= 3*A.Rent 
+											AND P.Min_Rent <= A.Rent 
+											AND P.Max_Rent >= A.Rent) 
 											AND NOT EXISTS (SELECT * FROM Resident WHERE Username = '$username')";
 			if (db()->numOfRows($query) < 1) {
 				$_SESSION['error'] = "Your application has been automatically rejected by the system based on our requirements. ";
