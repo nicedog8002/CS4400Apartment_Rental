@@ -7,12 +7,12 @@
 		</tr>
 		<tr>
 			<th><label for="ccno">Card Number</label></th>
-			<td><input type="text" id="ccno" name="cardnumber" /></td>
+			<td><input type="text" id="ccno" name="card" /></td>
 		</tr>
 		<tr>
 			<th><label for="expiration">Expiration Date</label></th>
 			<td>
-			<select name="rentyear">
+			<select name="expyear">
 				<?php 
 				$maxYear = intval(date('Y'));
 				for ($i = 0; $i < 20; $i++) {
@@ -22,7 +22,7 @@
 				}
 				?>
 				</select>
-				<select name="rentmonth">
+				<select name="expmonth">
 					<option value="1">January</option>
 					<option value="2">February</option>
 					<option value="3">March</option>
@@ -56,7 +56,19 @@
 	<table class="form">
 		<tr>
 			<th><label for="deletedcard">Card Number</label></th>
-			<td><input type="text" id="deletedcard" name="card" /></td>
+			<td>
+				<select id="deletedcard" name="card">
+					<?php 
+					$Username = $_SESSION['username'];
+					$query = "SELECT Card_No FROM Payment_Information 
+									WHERE Username = '$Username'";
+					$cards = db()->query($query);
+					foreach ($cards as $card) {
+						echo '<option value="' . $card['Card_No'] . '">' . $card['Card_No'] . '</option>';
+					}
+					?>
+				</select>
+			</td>
 		</tr>
 		<tr class="submit">
 			<td></td>

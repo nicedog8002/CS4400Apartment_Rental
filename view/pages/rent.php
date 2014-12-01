@@ -1,4 +1,5 @@
 <?php 
+$scheduleDate = date('Y') . '-' . date('m') .  '' . '-' . date('d');
 $query = "SELECT A.Rent AS Calculated_Rent, A.Apt_No, Card_No
 	FROM Apartment AS A, Resident AS R, Prospective_Resident AS PR, Payment_Information AS PI
 	WHERE R.Username = PR.Username 
@@ -43,15 +44,14 @@ $query = "SELECT A.Rent AS Calculated_Rent, A.Apt_No, Card_No
 	AND A.Apt_NO NOT IN (SELECT Apt_NO FROM Payment)";
 
 	$res = db()->fetch($query);
-	print_r($res);
-	$rent = $res['Calculated_Rent'];
 ?>
 <h2>Online Rent Payment</h2>
 	<form id="payRent" action="rent" method="post">
 		<table class="form">
 			<tr>
 				<th><label for="date">Payment Date</label></th>
-				<td><input type="text" id="date" name="date" class="datepicker" /></td>
+				<td><input type="text" id="date" name="date" class="datepicker" value="<?php 
+					echo $scheduleDate; ?>" /></td>
 			</tr>
 			<tr>
 				<th><label for="apartmentno">Apartment No</label></th>
@@ -72,6 +72,7 @@ $query = "SELECT A.Rent AS Calculated_Rent, A.Apt_No, Card_No
 					?>
 					</select>
 					<select name="rentmonth">
+						<option value="<?php echo date('n'); ?>"><?php echo date('F'); ?></option>
 						<option value="1">January</option>
 						<option value="2">February</option>
 						<option value="3">March</option>
@@ -94,14 +95,24 @@ $query = "SELECT A.Rent AS Calculated_Rent, A.Apt_No, Card_No
 			<tr>
 				<th><label for="card">Use Card</label></th>
 				<td>
-					<select name="card" id="card"></select>
+					<select name="card" id="card">
+<?php 
+$Username = $_SESSION['username'];
+$query = "SELECT Card_No FROM Payment_Information WHERE Username = $Username";
+$cards = db()->fetchMany($query);
+foreach ($cards as $card) {
+	echo '
+						<option value="' . $card['Card_No'] . '">' . $card['Card_No'] . '</option>';
+}
+?>
+					</select>
 				</td>
 			</tr>
 
 			<tr class="submit">
 				<td></td>
 				<td>
-					<input type="submit" value="Submit Rent Payment" />
+					<input type="submit" value="Submit Rent Payment" name="submit" />
 				</td>
 			</tr>
 		</table>
