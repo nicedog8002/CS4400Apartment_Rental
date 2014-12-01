@@ -14,7 +14,7 @@
 <div class="row">
 	<h3>Management</h3>
 	<div>
-		<a href="application">Review Applications</a>
+		<a href="application_review">Review Applications</a>
 		<a href="maintenance">View Maintenance Requests</a>
 		<a href="reminder">Send Rent Reminder</a>
 		<a href="report">View Reports</a>
