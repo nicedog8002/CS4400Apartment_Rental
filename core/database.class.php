@@ -10,7 +10,7 @@ class Database
 				. $this->connection->connect_errno;
 		}
 	}
-
+	
 	public function connection()
 	{
 		return $this->connection; 
@@ -23,8 +23,6 @@ class Database
 
 	public function query($query)
 	{
-		//echo $query; 
-
 		return mysqli_query($this->connection(), $query);
 	}
 
@@ -43,5 +41,12 @@ class Database
 			$arr[] = $row;
 		}
 		return $arr;
+	}
+
+	public function numOfRows($query){
+		// the number of affected rows after a query
+		$result = $this->connection()->query($query);
+		$num_rows = $this->connection()->affected_rows;
+		return $num_rows;
 	}
 }
