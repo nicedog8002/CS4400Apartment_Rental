@@ -1,0 +1,1 @@
+Make sure to edit config/config.php when you try to run your code! 
