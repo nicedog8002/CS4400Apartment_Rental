@@ -37,7 +37,26 @@ if ($_POST['submit']) {
 			redirect('home');
 			exit;
 		} else {
-			$_SESSION['notice'] = "Your application has been sent. You will be able to login once it's approved. ";
+			$query = "INSERT INTO Resident (Username) SELECT Username 
+									FROM Prospective_Resident AS P
+										WHERE P.Username = '$username'
+											AND (P.Pref_Move >= now()) 
+											AND (P.Pref_Move <= now() + INTERVAL 2 MONTH)
+											AND EXISTS (SELECT Apt_No FROM Apartment AS A 
+										WHERE A.Category = P.Req_Cat 
+											AND A.Available_On <= P.Pref_Move
+											AND P.Monthly_Income >= 3*A.Rent
+											AND P.Min_Rent <= A.Rent
+											AND P.Max_Rent >= A.Rent)
+											AND NOT EXISTS (SELECT * FROM Resident WHERE Username = '$username')";
+			if (db()->numOfRows($query) < 1) {
+				$_SESSION['error'] = "Your application has been automatically rejected by the system based on our requirements. ";
+			} else {
+				$_SESSION['notice'] = "Your application has been approved! You will be able to login once an apartment is alloted to you. ";
+			}
+
+			$_SESSION['not_applied'] = false;
+
 			redirect('index');
 			exit;
 		}

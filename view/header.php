@@ -1,4 +1,6 @@
-<!doctype html>
+<?php 
+global $page_title, $headerStuff, $includes; 
+?><!doctype html>
 
 <html lang="en">
 <head>
@@ -11,6 +13,14 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="<?php echo  SITE_PATH; ?>static/js/jquery-ui-1.11.2/jquery-ui.min.js"></script>
   <script src="<?php echo  SITE_PATH; ?>static/js/global.js"></script>
+  <?php 
+  if (is_array($includes['js'])) {
+    foreach ($includes['js'] as $js) {
+      echo '<script src="' . SITE_PATH . $js . '"></script>';
+    }
+  }
+  ?>
+  
   <link rel="stylesheet" href="<?php echo  SITE_PATH; ?>static/js/jquery-ui-1.11.2/jquery-ui.min.css">
   <link rel="stylesheet" href="<?php echo  SITE_PATH; ?>static/css/style.css">
 

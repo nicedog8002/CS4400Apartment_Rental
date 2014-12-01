@@ -28,6 +28,9 @@ if ($_POST['submit']) {
 			$_SESSION['username'] = $Username;
 			$_SESSION['notice'] = "You have successfully registered. ";
 
+			// We store whether the user has recently registered
+			$_SESSION['not_applied'] = true; 
+
 			// Send the user to the application page
 			redirect('application');
 			exit;

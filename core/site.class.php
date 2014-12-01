@@ -10,6 +10,8 @@ class Site
 	}
 
 	public static $single;
+	private $includes;
+
 	public static function single()
 	{
 		if(!isset(self::$single))
@@ -40,9 +42,11 @@ class Site
 		return $this->connection[$key]; 
 	}
 
+
+
 	public function view($p = false)
 	{
-		global $page_title, $headerStuff; 
+		global $page_title, $headerStuff, $includes; 
 
 		if (!$p) {
 			$p = 'index';
@@ -52,16 +56,19 @@ class Site
 		$p1 = $params[0];
 	
 		//If you're viewing a normal page
-
-		$this->getPrepage($p1); 
-		if(!$page_title)
-			$page_title = ucfirst($p1);
-
-		$this->header();
-		$this->getPage($p1);
-		$this->footer();
-		
-
+		if ($p1 == 'ajax') {
+			$handler = $params[1];
+			$this->getPrepageSpecial($handler, 'view/ajax/');
+		} else {
+			$this->getJavascript($p1);
+			$this->getPrepage($p1); 
+			if(!$page_title)
+				$page_title = ucfirst($p1);
+			$includes = $this->includes;
+			$this->header();
+			$this->getPage($p1);
+			$this->footer();
+		}
 	}
 
 	public function getPage($p)
@@ -78,9 +85,29 @@ class Site
 		}
 	}
 
+	public function getJavascript($p)
+	{
+		$url_part = 'static/js/' . mb_strtolower($p) . '.js';
+		// echo $url; 
+		if(file_exists(DOC_ROOT . $url_part))
+		{
+			$this->includes['js'][] = SITE_PATH . $url_part;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	public function getPrepage($p)
 	{
-		$url = DOC_ROOT . 'view/pre/' . mb_strtolower($p) . '.php';
+		return $this->getPrepageSpecial($p, 'view/pre/');
+	}
+
+	public function getPrepageSpecial($p, $base)
+	{
+		$url = DOC_ROOT . $base . mb_strtolower($p) . '.php';
 		//echo $url; 
 		if(file_exists($url))
 		{

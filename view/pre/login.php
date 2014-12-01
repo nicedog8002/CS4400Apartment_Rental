@@ -8,10 +8,11 @@ if ($_POST['submit']) {
 		//$query = "select * from User";
 		$query = "SELECT Username 
 				  FROM User AS U
-                  WHERE EXISTS (
+              WHERE EXISTS (
                   SELECT * FROM Management WHERE Management.Username = '$Username'
                    UNION ALL
-				  SELECT * FROM Resident WHERE Resident.Username = '$Username' AND Apt_No IS NOT NULL) 
+				  				SELECT * FROM Resident WHERE Resident.Username = '$Username' 
+				  					AND Apt_No IS NOT NULL) 
 				  AND U.Username = '$Username' AND U.Password = '$Password';";
 	    //echo $query;
 		$result = db()->numOfRows($query);
