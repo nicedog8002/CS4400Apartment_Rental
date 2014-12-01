@@ -3,6 +3,7 @@ if(!defined('VALID_SITE')) exit('No direct access! ');
 
 require_once('./config/config.php');
 
+
 require_once('functions.php');
 
 

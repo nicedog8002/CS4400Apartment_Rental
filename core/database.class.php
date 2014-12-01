@@ -43,9 +43,11 @@ class Database
 		return $arr;
 	}
 
-	public function numOfRows($query){
+	public function numOfRows($query = false){
 		// the number of affected rows after a query
-		$result = $this->connection()->query($query);
+		if ($query) {
+			$this->connection()->query($query);
+		}
 		$num_rows = $this->connection()->affected_rows;
 		return $num_rows;
 	}
