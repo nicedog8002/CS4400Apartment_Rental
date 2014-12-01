@@ -91,7 +91,7 @@ class Site
 		// echo $url; 
 		if(file_exists(DOC_ROOT . $url_part))
 		{
-			$this->includes['js'][] = SITE_PATH . $url_part;
+			$this->includes['js'][] = $url_part;
 			return true;
 		}
 		else
