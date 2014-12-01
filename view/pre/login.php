@@ -13,7 +13,7 @@ if ($_POST['submit']) {
                    UNION ALL
 				  SELECT * FROM Resident WHERE Resident.Username = '$Username' AND Apt_No IS NOT NULL) 
 				  AND U.Username = '$Username' AND U.Password = '$Password';";
-	    echo $query;
+	    //echo $query;
 		$result = db()->numOfRows($query);
 		if (!$result) {
 			$_SESSION['error'] = "Either the username of password is wrong";
