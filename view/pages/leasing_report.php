@@ -38,3 +38,9 @@ $query = "SELECT MONTHNAME(PR.Pref_Move) AS Lease_Month, A.Category, COUNT(A.Apt
 }
 ?>
 
+<br>
+<a href="report">
+  Back to Reports
+</a>
+
+

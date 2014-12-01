@@ -35,7 +35,7 @@ $query = "SELECT A.Apt_No AS Apartment_No, (P.Amount - A.Rent) AS Extra_Paid, (D
 $result = db()->query($query);
  ?>
  <?php if (db()->numOfRows($query)){ ?>
- <P> The defaulted rent for <?php echo $monthName; ?> is: </p>
+ <p> The defaulted rent for <?php echo $monthName; ?> is: </p>
     <br>
     <table>
       <thead>
@@ -65,5 +65,7 @@ $result = db()->query($query);
 <?php
 }
 ?>
-
-
+<br>
+<a href="report">
+  Back to Reports
+</a>

@@ -1,3 +1,6 @@
+<?php 
+if (!$_SESSION['is_manager']) {
+?>
 <h2>Manage Your Apartment</h2>
 <div class="row">
 	<h3>Residents</h3>
@@ -11,6 +14,10 @@
 		<a href="payment">Payment Information</a>
 	</div>
 </div>
+<?php 
+} else {
+?>
+<h2>Manage Your Buildings</h2>
 <div class="row">
 	<h3>Management</h3>
 	<div>
@@ -20,3 +27,6 @@
 		<a href="report">View Reports</a>
 	</div>
 </div>
+<?php 
+} 
+?>

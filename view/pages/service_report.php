@@ -37,5 +37,9 @@ $query = "SELECT  MONTHNAME(Date_Of_Request) AS Month, Issue_Type, AVG(DATEDIFF(
 <?php 
 }
 ?>
+<br>
+<a href="report">
+  Back to Reports
+</a>
 
   
