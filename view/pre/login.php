@@ -7,20 +7,22 @@ if ($_POST['submit']) {
 	// db() is a custom function written to abstract PHP queries
 		//$query = "select * from User";
 		$query = "SELECT U.Username AS Username, R.Username AS Resident_Name, 
-									M.Username AS Manager_Name, R.Apt_No AS Apt_No, 
-									P.Username AS Prospective_Name
-				  FROM User AS U, Management AS M, Resident AS R, Prospective_Resident AS P  
+									P.Username AS Prospective_Name, 
+									M.Username AS Manager_Name, R.Apt_No AS Apt_No
+				  FROM User AS U, Management AS M, 
+				  	Prospective_Resident AS P LEFT JOIN Resident AS R ON P.Username = R.Username 
 				  WHERE (U.Username = M.Username OR U.Username = P.Username) 
 				  	AND U.Username = '$Username' AND U.Password = '$Password' LIMIT 1";
 	    //echo $query;
 		$result = db()->fetch($query);
+		
 		if (!$result) {
 			$_SESSION['error'] = "Incorrect username or password. ";
 			redirect('login');
 			exit;
-		} else if ($result['Manager_Name'] != $Username && !$result['Apt_No']) {
+		} else if ($result['Resident_Name'] == $Username && !$result['Apt_No']) {
 			$_SESSION['error'] = "Your application is pending. 
-							You will be able to login once a maanger allots you an apartment. ";
+							You will be able to login once a manager allots you an apartment. ";
 			redirect('login');
 			exit;
 		} else if ($result['Manager_Name'] != $Username && $result['Prospective_Name'] != $Username) {
