@@ -4,8 +4,16 @@ if (!$_SESSION['is_manager']) {
 <h2>Manage Your Apartment</h2>
 <div class="row">
 	<h3>Residents</h3>
+	<?php 
+	$query = "SELECT COUNT(Date) AS Count FROM Reminder 
+				WHERE Apt_No = (SELECT Apt_No FROM Resident 
+					WHERE Username = '$Username') AND Status = 'unread'";
+	
+	$count = db()->fetch($query);
+	$count = $count['Count'];
+	?>
 	<p>
-		<a href="message">You have 0 Messages
+		<a href="message">You have <?php echo number_format($count); ?> Messages
 		</a>
 	</p>
 	<div>

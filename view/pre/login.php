@@ -15,7 +15,7 @@ if ($_POST['submit']) {
 				  	AND U.Username = '$Username' AND U.Password = '$Password' LIMIT 1";
 	    //echo $query;
 		$result = db()->fetch($query);
-		
+
 		if (!$result) {
 			$_SESSION['error'] = "Incorrect username or password. ";
 			redirect('login');
@@ -37,6 +37,7 @@ if ($_POST['submit']) {
 				$_SESSION['is_manager'] = true;
 				$_SESSION['notice'] = "You have successfully logged in as a manager. ";
 			} else if ($result['Resident_Name'] == $Username) {
+				$_SESSION['is_manager'] = false;
 				$_SESSION['notice'] = "You have successfully logged in as a resident. ";
 				$_SESSION['apt_no'] = $result['Apt_No'];
 			} else {
