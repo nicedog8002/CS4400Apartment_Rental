@@ -20,7 +20,8 @@ global $page_title, $headerStuff, $includes;
     }
   }
   ?>
-  
+
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="<?php echo  SITE_PATH; ?>static/js/jquery-ui-1.11.2/jquery-ui.min.css">
   <link rel="stylesheet" href="<?php echo  SITE_PATH; ?>static/css/style.css">
 

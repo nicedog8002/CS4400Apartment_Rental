@@ -1,9 +1,9 @@
 <div class="row">
 	<div class="col2">
-		<a href="login">Login</a>
+		<a href="login" class="large-block">Login</a>
 	</div>
 	<div class="col2">
-		<a href="register">Register</a>
+		<a href="register" class="large-block">Register</a>
 	</div>
 </div>
 

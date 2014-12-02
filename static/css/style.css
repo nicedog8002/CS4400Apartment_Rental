@@ -6,24 +6,59 @@ body {
 	padding: 0;
 }
 
+.large-block {
+	display: block;
+	width: 100%;
+	color: #CCFFFF;
+	border-color: #66CCCC;
+	font-size: 70px;
+	text-decoration: none;
+	background: #000099;
+	text-align: center;
+	height: 250px;
+	line-height: 250px;
+}
+
+.large-block:hover {
+	background: #CCCC33;
+	color: #660099;
+}
+
+td, th {
+	padding: 5px;
+}
+
 #container {
 	background-color: #fff;
 	width: 1000px;
 	min-height: 500px;
+	padding: 12px;
 	margin: 0 auto;
 	text-align: left;
-	font-family: Tahoma;
+	font-family: 'PT Serif', serif;
 }
 
 #container h1 {
 	font-weight: normal;
 	text-align: center;
-	margin: 0 auto;
+	margin: 0 auto 20px;
 	width: 90%;
 	padding: 0 5%;
-	font-size: 35px;
+	font-size: 30px;
+	display: block;
 	line-height: 80px;
 	float: left;
+	text-decoration: none;
+}
+
+#container h1 a {
+	text-decoration: none;
+	color: #330066;
+	font-weight: bold;
+}
+
+#container h1 a:hover {
+	color: #336666;
 }
 
 .row {
