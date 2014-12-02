@@ -62,6 +62,8 @@ if ($day > 3) {
 	}
 	?>
 <?
+} else {
+	echo "It's not yet the 3rd day of the month, no one has defaulted the rent";
 }
 ?>
 
