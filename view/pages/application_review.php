@@ -1,5 +1,5 @@
 <?php 
-$query = "SELECT *, 0 AS Is_Accepted FROM Prospective_Resident AS P 
+$query = "(SELECT *, 0 AS Is_Accepted FROM Prospective_Resident AS P 
 			WHERE NOT EXISTS 
 			(SELECT Username FROM Resident AS R 
 			WHERE R.Username = P.Username))
@@ -7,7 +7,8 @@ $query = "SELECT *, 0 AS Is_Accepted FROM Prospective_Resident AS P
 			(SELECT *, 1 AS Is_Accepted FROM Prospective_Resident AS P 
 			WHERE EXISTS 
 			(SELECT Username FROM Resident AS R 
-			WHERE R.Username = P.Username AND Apt_No IS NULL)";
+			WHERE R.Username = P.Username AND Apt_No IS NULL))";
+$apps = db()->fetchMany($query);
 ?>
 <form action="allot_apartment" method="post" >
 <table>
@@ -39,7 +40,6 @@ $query = "SELECT *, 0 AS Is_Accepted FROM Prospective_Resident AS P
 		<td></td>
 	</tr>
 <?php 
-$apps = db()->fetchMany($query);
 foreach ($apps as $app) {
 	echo "
 	<tr>
@@ -53,7 +53,7 @@ foreach ($apps as $app) {
 		<td>$app[Is_Accepted]</td>
 		<td>
 			" . ($app['Is_Accepted'] ? 
-				'<input type="radio" name="allot" value="' . $app['Username'] . '" />' : '') 
+				'<input type="radio" name="username" value="' . $app['Username'] . '" />' : '') 
 			. "
 		</td>
 	</tr>";
