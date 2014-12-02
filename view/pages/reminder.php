@@ -1,5 +1,3 @@
-
-
 <h2>Reminder</h2>
 
 <div align ="center"> 

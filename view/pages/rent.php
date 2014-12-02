@@ -96,15 +96,15 @@ $query = "SELECT A.Rent AS Calculated_Rent, A.Apt_No, Card_No
 				<th><label for="card">Use Card</label></th>
 				<td>
 					<select name="card" id="card">
-<?php 
-$Username = $_SESSION['username'];
-$query = "SELECT Card_No FROM Payment_Information WHERE Username = $Username";
-$cards = db()->fetchMany($query);
-foreach ($cards as $card) {
-	echo '
+				<?php 
+				$Username = $_SESSION['username'];
+				$query = "SELECT Card_No FROM Payment_Information WHERE Username = '$Username'";
+				$cards = db()->fetchMany($query);
+				foreach ($cards as $card) {
+					echo '
 						<option value="' . $card['Card_No'] . '">' . $card['Card_No'] . '</option>';
-}
-?>
+				}
+				?>
 					</select>
 				</td>
 			</tr>

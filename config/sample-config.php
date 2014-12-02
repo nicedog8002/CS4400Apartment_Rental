@@ -2,7 +2,7 @@
 if(!defined('VALID_SITE')) exit('No direct access! ');
 
 date_default_timezone_set('America/New_York');
-error_reporting(0);
+error_reporting(E_ALL);
 
 ### Constants and vars ###
 define('DOMAIN', 'http://localhost:8080');
