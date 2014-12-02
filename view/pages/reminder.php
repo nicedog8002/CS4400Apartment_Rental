@@ -1,7 +1,7 @@
 <h2>Reminder</h2>
 
 <div align ="center"> 
-	Date: <?php echo date("j, n, Y"); ?>
+	Date: <?php echo date("M j, Y"); ?>
 </div>
 <?php 
 	$day = date('j');
@@ -59,7 +59,7 @@ if ($day > 3) {
 		}
 	}
 	?>
-<?
+<?php 
 }
 ?>
 
