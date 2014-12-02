@@ -5,6 +5,7 @@ if (!$_SESSION['is_manager']) {
 <div class="row">
 	<h3>Residents</h3>
 	<?php 
+	$Username = $_SESSION['username'];
 	$query = "SELECT COUNT(Date) AS Count FROM Reminder 
 				WHERE Apt_No = (SELECT Apt_No FROM Resident 
 					WHERE Username = '$Username') AND Status = 'unread'";

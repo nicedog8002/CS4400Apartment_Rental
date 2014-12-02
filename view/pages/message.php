@@ -1,4 +1,5 @@
 <?php 
+$Username = $_SESSION['username'];
 $query = "SELECT `Message`, `Date` FROM Reminder 
 					WHERE Apt_No = (SELECT Apt_No FROM Resident WHERE Username = '$Username') 
 					AND Status = 'unread' ORDER BY `Date` DESC";
@@ -7,6 +8,10 @@ $messages = db()->fetchMany($query);
 ?>
 
 <table>
+	<tr>
+		<th>Date</th>
+		<th>Message</th>
+	</tr>
 <?php
 if (count($messages) < 1) {
 ?>
@@ -21,10 +26,10 @@ if (count($messages) < 1) {
 		echo "
 		<tr>
 			<td>
-				$m[date]
+				$m[Date]
 			</td>
 			<td>
-				$m[message]
+				$m[Message]
 			</td>
 		</tr>";
 	}
