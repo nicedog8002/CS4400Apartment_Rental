@@ -21,18 +21,18 @@
 	foreach ($requests as $req) {
 		echo "
 		<tr>
-			<th>
+			<td>
 				$req[Date_Of_Request]
-			</th>
-			<th>
+			</td>
+			<td>
 				$req[Apt_No]
-			</th>
-			<th>
+			</td>
+			<td>
 				$req[Issue_Type]
-			</th>
+			</td>
 			<td>
 				<input type='checkbox' name='requests[]' 
-					value='$req[Date_of_Request],$req[Apt_No],$req[Issue_Type]' />
+					value='$req[Date_Of_Request],$req[Apt_No],$req[Issue_Type]' />
 			</td>
 		</tr>";
 	}
