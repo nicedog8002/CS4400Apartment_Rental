@@ -59,7 +59,7 @@ $apartments = db()->fetchMany($query);
 ?>
 	<tr>
 		<td colspan="6">
-			<input type="submit" value="Allot Apartment" name="submit" />
+			<input type="submit" value="Allot Apartment" name="allot" />
 		</td>
 	</tr>
 </table>

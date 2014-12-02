@@ -20,11 +20,6 @@ if ($_POST['submit']) {
 			$_SESSION['error'] = "Incorrect username or password. ";
 			redirect('login');
 			exit;
-		} else if ($result['Resident_Name'] == $Username && !$result['Apt_No']) {
-			$_SESSION['error'] = "Your application is pending. 
-							You will be able to login once a manager allots you an apartment. ";
-			redirect('login');
-			exit;
 		} else if ($result['Manager_Name'] != $Username && $result['Prospective_Name'] != $Username) {
 			$_SESSION['error'] = "You never filled out your prospective resident form! ";
 			redirect('application');
@@ -42,7 +37,8 @@ if ($_POST['submit']) {
 				$_SESSION['apt_no'] = $result['Apt_No'];
 				echo $Username;
 			} else {
-				$_SESSION['error'] = "Your application was automatically rejected, so you cannot login. ";
+				$_SESSION['error'] = "Your application is pending. 
+							You will be able to login once a manager allots you an apartment. ";
 				redirect('login');
 				exit;
 			}
