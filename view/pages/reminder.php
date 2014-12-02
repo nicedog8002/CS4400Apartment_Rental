@@ -5,7 +5,7 @@
 </div>
 <?php 
 	$day = date('j');
-if ($day > 3) {
+if ($day > 0) {
 ?>
 	<form id="Reminder" action="reminder" method="post">
 		<table class="form">

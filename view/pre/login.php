@@ -40,6 +40,7 @@ if ($_POST['submit']) {
 				$_SESSION['is_manager'] = false;
 				$_SESSION['notice'] = "You have successfully logged in as a resident. ";
 				$_SESSION['apt_no'] = $result['Apt_No'];
+				echo $Username;
 			} else {
 				$_SESSION['error'] = "Your application was automatically rejected, so you cannot login. ";
 				redirect('login');
