@@ -9,8 +9,24 @@ $Amount = intval($_POST['amount']);
 $Apt_No = intval($_POST['apt_no']);
 
 if ($_POST['submit']) {
-	if (!$Month || !$Year || !$Card_No || !$scheduleDate || !$Amount || !$Apt_No) {
-		$_SESSION['error'] = "You must complete all fields. ";
+	if (!$MONTH || $Year){
+		$_SESSION['error'] = "You must pick the date.";
+		redirect('rent');
+		exit;
+	} else if (!$Card_No){
+		$_SESSION['error'] = "You must enter you card number. ";
+		redirect('rent');
+		exit;
+	} else if (!$scheduleDate) {
+		$_SESSION['error'] = "You must schedule your payment date. ";
+		redirect('rent');
+		exit;
+	} else if ($Amount) {
+		$_SESSION['error'] = "You must enter the amount. ";
+		redirect('rent');
+		exit;
+	} else if ($Apt_No) {
+		$_SESSION['error'] = "You must enter your apartment number. ";
 		redirect('rent');
 		exit;
 	}

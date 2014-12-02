@@ -27,10 +27,15 @@ if (count($messages) < 1) {
 				$m[message]
 			</td>
 		</tr>";
+
+	$query = "UPDATE Reminder SET Status = 'read' 
+			  WHERE  Apt_No = (SELECT Apt_No FROM Resident WHERE Username = '$Username') 
+			  AND Status = 'unread' AND Date = $m[date]";
+	echo $query;
+	$result = db()->query($query);
 	}
 }
 ?>
 </table>
-
 <br>
 <a href="home">Back to home</a>
