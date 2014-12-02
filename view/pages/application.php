@@ -1,3 +1,8 @@
+<?php
+$today = date("M j, Y");
+$twoMonthFromNow = date("M j, Y");
+
+?>
 <h2>Prospective Resident Application Form</h2>
 	<form id="application" action="application" method="post">
 		<table class="form">
@@ -52,17 +57,20 @@
 			</tr>
 			<tr>
 				<th><label for="income">Monthly Income</label></th>
-				<td><input type="text" id="income" name="income" /></td>
+				<td><input type="text" id="income" name="income" placeholder = "suggest 3 times more than the minimum rent"/></td>
 			</tr>
 			<tr>
 				<th><label for="category">Category of Apartment</label></th>
 				<td>
 					<select id="category" name="category">
-						<?php 
-						$Categories = db()->fetchMany("SELECT DISTINCT Category FROM Apartment WHERE Category IS NOT NULL");
-						foreach ($Categories as $cat) {
-							echo '<option value="' . $cat['Category'] . '">' . $cat['Category'] . '</option>';
-						}
+						<?php
+							$query = " SELECT DISTINCT Category FROM apartment AS A
+ 										WHERE A.Apt_No NOT IN (SELECT Apt_No FROM Resident)
+ 										AND A.Category IS NOT NULL";
+							$Categories = db()->query($query);
+							foreach ($Categories as $cat) {
+								echo '<option value="' . $cat['Category'] . '">' . $cat['Category'] . '</option>';
+							}
 						?>
 					</select>
 				</td>
@@ -74,22 +82,19 @@
 
 			<tr>
 				<th><label for="minrent">Min Rent</label></th>
-				<td><input type="text" id="minrent" name="minrent" /></td>
+				<td><input type="text" id="minrent" name="minrent"/></td>
 			</tr>
 			<tr>
 				<th><label for="movein">Preferred Move-In Date</label></th>
-				<td><input type="text" id="movein" name="movein" class="datepicker" /></td>
+				<td><input type="text" id="movein" name="movein" class="datepicker" placeholder="between today and two month from now"/></td>
 			</tr>
 			<tr>
 				<th><label for="lease">Lease Term</label></th>
 				<td>
 					<select id="lease" name="lease">
-						<?php 
-						$Leases = db()->fetchMany("SELECT DISTINCT Lease_Term FROM Apartment WHERE Lease_Term IS NOT NULL");
-						foreach ($Leases as $lease) {
-							echo '<option value="' . $lease['Lease_Term'] . '">' . $lease['Lease_Term'] . ' Months</option>';
-						}
-						?>
+						<option value="3">3 MONTH</option>
+						<option value="6">6 MONTH</option>
+						<option value="12">12 MONTH</option>
 					</select>
 				</td>
 			</tr>

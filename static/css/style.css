@@ -32,6 +32,9 @@ body {
 	padding: 0 1%;
 	float: left;
 }
+input[type="Text"] {
+	width :300px;
+}
 
 .col2 {
 	width: 48%;
