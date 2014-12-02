@@ -27,7 +27,7 @@ if ($day > 0) {
 			<div>
 				<div><p><b>Message: </b></p></div>
 				<div>
-					<p> Your payment is past due. Please pay immediately. </p>
+					<p> Your rent is past due. Please pay immediately. </p>
 				</div>
 			</div>
 			<tr class="submit">
