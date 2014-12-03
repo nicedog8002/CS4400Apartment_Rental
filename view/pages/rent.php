@@ -92,7 +92,7 @@ $query = "SELECT A.Rent AS Calculated_Rent, A.Apt_No, Card_No
 			</tr>
 			<tr>
 				<th><label for="amount">Amount Due</label></th>
-				<td><input type="text" id="amount" name="amount" value="<?php echo $ent; ?>" /></td>
+				<td><input type="text" id="amount" name="amount" value="<?php echo $Rent; ?>" /></td>
 			</tr>
 			<tr>
 				<th><label for="card">Use Card</label></th>
