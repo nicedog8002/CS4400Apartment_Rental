@@ -86,16 +86,16 @@ $twoMonthFromNow = date("M j, Y");
 				<td><input type="text" id="minrent" name="minrent"/></td>
 			</tr>
 			<tr>
-				<th><label for="movein">Preferred Move-In Date</label></th>
-				<td><input type="text" id="movein" name="movein" class="datepicker" placeholder="between today and two month from now"/></td>
+				<th><label for="prefMoveDate">Preferred Move-In Date</label></th>
+				<td><input type="text" id="prefMoveDate" name="movein" placeholder="between today and two months from now" /></td>
 			</tr>
 			<tr>
 				<th><label for="lease">Lease Term</label></th>
 				<td>
 					<select id="lease" name="lease">
-						<option value="3">3 MONTH</option>
-						<option value="6">6 MONTH</option>
-						<option value="12">12 MONTH</option>
+						<option value="3">3 MONTHS</option>
+						<option value="6">6 MONTHS</option>
+						<option value="12">12 MONTHS</option>
 					</select>
 				</td>
 			</tr>

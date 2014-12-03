@@ -1,6 +1,13 @@
 $(document).ready(
 	function() {
-		$('.datepicker').datepicker({ dateFormat: "yy-mm-dd", minDate: new Date()});
+		var now = new Date();
+
+		$('.datepicker').datepicker({dateFormat: "yy-mm-dd", minDate: now});
+		$('#prefMoveDate').datepicker({ 
+				dateFormat: "yy-mm-dd", 
+				minDate: now,
+				maxDate: "+2m"
+			});
 	}
 );
 
