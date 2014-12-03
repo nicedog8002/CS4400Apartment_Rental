@@ -10,6 +10,14 @@ $Exp_Date = $_POST['expyear'] . $_POST['expmonth'];
 if ($_POST['add']) {
 	if (!$Username || !$Card_No || !$CVV || !$Name) {
 		$_SESSION['error'] = "All fields are required for adding a card.";
+	} else if (strlen($Card_No) != 16) {
+		$_SESSION['error'] = "Your credit card number has to be 16 digits long. ";
+	} else if (strlen($CVV) != 3) {
+		$_SESSION['error'] = "Your CVV must be 3 digits long. ";
+	} else if (preg_match('/\D/', $_POST['card'])) {
+		$_SESSION['error'] = "Your credit card number can only contain digits.";
+	} else if (preg_match('/\D/', $_POST['cvv'])) {
+		$_SESSION['error'] = "Your CVV can only contain digits.";
 	} else {
 		// db() is a custom function written to abstract PHP queries
 		$query = "INSERT INTO Payment_Information (Card_No, CVV, Name_On_Card, Exp_Date, Username) 

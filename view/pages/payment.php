@@ -3,11 +3,11 @@
 	<table class="form">
 		<tr>
 			<th><label for="name">Name on the Card</label></th>
-			<td><input type="text" id="name" name="name" /></td>
+			<td><input type="text" id="name" name="name" value="<?php echo $_POST['name'] ?>" /></td>
 		</tr>
 		<tr>
 			<th><label for="ccno">Card Number</label></th>
-			<td><input type="text" id="ccno" name="card" /></td>
+			<td><input type="text" id="ccno" name="card" value="<?php echo $_POST['card'] ?>" /></td>
 		</tr>
 		<tr>
 			<th><label for="expiration">Expiration Date</label></th>
@@ -40,7 +40,7 @@
 		</tr>
 		<tr>
 			<th><label for="cvv">CVV</label></th>
-			<td><input type="text" id="cvv" name="cvv" /></td>
+			<td><input type="text" id="cvv" name="cvv" value="<?php echo $_POST['cvv'] ?>" /></td>
 		</tr>
 
 		<tr class="submit">
