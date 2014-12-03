@@ -55,7 +55,7 @@ $query = "SELECT A.Rent AS Calculated_Rent, A.Apt_No, Card_No
 			</tr>
 			<tr>
 				<th><label for="apartmentno">Apartment No</label></th>
-				<td><input type="text" id="apartmentno" name="apartmentno" value="<?php 
+				<td><input type="text" id="apartmentno" name="apt_no" value="<?php 
 					echo $_SESSION['apt_no']; ?>" /></td>
 			</tr>
 			<tr>
@@ -63,9 +63,9 @@ $query = "SELECT A.Rent AS Calculated_Rent, A.Apt_No, Card_No
 				<td>
 					<select name="rentyear">
 					<?php 
-					$maxYear = intval(date('Y'));
-					for ($i = 0; $i < 10; $i++) {
-						$year = $maxYear - $i;
+					$minYear = intval(date('Y'));
+					for ($i = 0; $i < 3; $i++) {
+						$year = $minYear + $i;
 						echo '
 						<option value="' . $year . '">' . $year . '</option>';
 					}
