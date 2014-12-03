@@ -44,6 +44,13 @@ if ($_POST['submit']) {
 			$_SESSION['error'] = "You've already submitted a prospective resident application form! " . db()->error();
 			redirect('home');
 			exit;
+		} else {
+			$_SESSION['notice'] = "Your application has been sent! You will be able to login once an apartment is alloted to you. ";
+
+			$_SESSION['not_applied'] = false;
+
+			redirect('index');
+			exit;
 		}
 	}
 }

@@ -6,24 +6,96 @@ body {
 	padding: 0;
 }
 
+input[type="radio"] {
+	width: 20px;
+	height: 20px;
+}
+
+input[type="checkbox"] {
+	width: 20px;
+	height: 20px;
+}
+
+input[type="submit"] {
+	padding: 5px;
+	color: #CCFFFF;
+	font-size: 20px;
+	font-weight: bold;
+	background: #000099;
+	text-align: center;
+	border: none;
+	font-family: 'PT Serif', serif;
+	cursor: pointer;
+}
+
+.large-block {
+	display: block;
+	width: 100%;
+	color: #EEFFFF;
+	border-color: #66CCCC;
+	font-size: 70px;
+	text-decoration: none;
+	background: #000099;
+	text-align: center;
+	height: 250px;
+	line-height: 250px;
+}
+
+a.large-block, a.large-block:active, a.large-block:visited, a.large-block:link {
+	color: #EEFFFF;
+}
+
+.large-block:hover {
+	background: #CCCC33;
+	color: #660099;
+	text-decoration: none;
+}
+
+a, a:link, a:visited, a:active {
+	color: #000099;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #660099;
+	text-decoration: underline;
+}
+
+td, th {
+	padding: 5px;
+}
+
 #container {
 	background-color: #fff;
 	width: 1000px;
 	min-height: 500px;
+	padding: 12px;
 	margin: 0 auto;
 	text-align: left;
-	font-family: Tahoma;
+	font-family: 'PT Serif', serif;
 }
 
 #container h1 {
 	font-weight: normal;
 	text-align: center;
-	margin: 0 auto;
+	margin: 0 auto 20px;
 	width: 90%;
 	padding: 0 5%;
-	font-size: 35px;
+	font-size: 30px;
+	display: block;
 	line-height: 80px;
 	float: left;
+	text-decoration: none;
+}
+
+#container h1 a {
+	text-decoration: none;
+	color: #330066;
+	font-weight: bold;
+}
+
+#container h1 a:hover {
+	color: #336666;
 }
 
 .row {

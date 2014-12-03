@@ -1,13 +1,9 @@
 <?php 
-$query = "(SELECT *, 0 AS Is_Accepted FROM Prospective_Resident AS P 
+$query = "SELECT * FROM Prospective_Resident AS P 
 			WHERE NOT EXISTS 
 			(SELECT Username FROM Resident AS R 
-			WHERE R.Username = P.Username))
-			UNION 
-			(SELECT *, 1 AS Is_Accepted FROM Prospective_Resident AS P 
-			WHERE EXISTS 
-			(SELECT Username FROM Resident AS R 
-			WHERE R.Username = P.Username AND Apt_No IS NULL))";
+			WHERE R.Username = P.Username)";
+
 $apps = db()->fetchMany($query);
 ?>
 <form action="allot_apartment" method="post" >
@@ -41,6 +37,21 @@ $apps = db()->fetchMany($query);
 	</tr>
 <?php 
 foreach ($apps as $app) {
+	$Username = $app['Username'];
+	$query = "SELECT Username 
+						FROM Prospective_Resident AS P
+							WHERE P.Username = '$Username'
+								AND (P.Pref_Move >= now()) 
+								AND (P.Pref_Move <= now() + INTERVAL 2 MONTH)
+								AND EXISTS (SELECT Apt_No FROM Apartment AS A 
+							WHERE A.Category = P.Req_Cat 
+								AND A.Available_On <= P.Pref_Move 
+								AND P.Monthly_Income >= 3*A.Rent 
+								AND P.Min_Rent <= A.Rent 
+								AND P.Max_Rent >= A.Rent) 
+								AND NOT EXISTS (SELECT * FROM Resident WHERE Username = '$Username')";
+	$Is_Accepted = db()->numOfRows($query);
+	$Accepted = ($Is_Accepted ? 'Accepted' : 'Rejected');
 	echo "
 	<tr>
 		<td>$app[Name]</td>
@@ -49,11 +60,11 @@ foreach ($apps as $app) {
 		<td>$" . number_format($app['Monthly_Income']) . "</td>
 		<td>$app[Req_Cat]</td>
 		<td>$app[Pref_Move]</td>
-		<td>$app[Pref_Lease_Term]</td>
-		<td>$app[Is_Accepted]</td>
+		<td>$app[Pref_Lease_Term] Months</td>
+		<td>$Accepted</td>
 		<td>
-			" . ($app['Is_Accepted'] ? 
-				'<input type="radio" name="username" value="' . $app['Username'] . '" />' : '') 
+			" . ($Is_Accepted ? 
+				'<input type="radio" name="username" value="' . $Username . '" />' : '') 
 			. "
 		</td>
 	</tr>";
