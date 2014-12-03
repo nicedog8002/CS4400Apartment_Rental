@@ -32,8 +32,9 @@ body {
 	padding: 0 1%;
 	float: left;
 }
-input[type="Text"] {
-	width :300px;
+
+#prev_residence, #income, #movein {
+	width :250px;
 }
 
 .col2 {

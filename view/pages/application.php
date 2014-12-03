@@ -8,9 +8,9 @@ $twoMonthFromNow = date("M j, Y");
 		<table class="form">
 			<tr>
 				<th><label for="name">Name</label></th>
-				<td><input type="text" id="name" name="name" /></td>
+				<td><input type="text" id="name" name="name"/></td>
 			</tr>
-			<tr>
+			<tr>	
 				<th><label for="dateOfBirth">Date of Birth</label></th>
 				<td>
 					<select name="birthyear">
@@ -64,10 +64,11 @@ $twoMonthFromNow = date("M j, Y");
 				<td>
 					<select id="category" name="category">
 						<?php
-							$query = " SELECT DISTINCT Category FROM apartment AS A
+							$query = "SELECT DISTINCT Category FROM apartment AS A
  										WHERE A.Apt_No NOT IN (SELECT Apt_No FROM Resident)
  										AND A.Category IS NOT NULL";
 							$Categories = db()->query($query);
+							echo $query;
 							foreach ($Categories as $cat) {
 								echo '<option value="' . $cat['Category'] . '">' . $cat['Category'] . '</option>';
 							}
@@ -100,7 +101,7 @@ $twoMonthFromNow = date("M j, Y");
 			</tr>
 			<tr>
 				<th><label for="prev_residence">Previous Residence Address</label></th>
-				<td><textarea name="prev_residence"></textarea></td>
+				<td><textarea name="prev_residence" id = "prev_residence"></textarea></td>
 			</tr>
 			<tr class="submit">
 				<td></td>
