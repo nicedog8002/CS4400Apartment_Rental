@@ -105,6 +105,10 @@ td, th {
 	float: left;
 }
 
+#prev_residence, #income, #movein {
+	width :250px;
+}
+
 .col2 {
 	width: 48%;
 	padding: 0 1%;
