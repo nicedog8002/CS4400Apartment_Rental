@@ -51,6 +51,7 @@ foreach ($apps as $app) {
 								AND P.Max_Rent >= A.Rent) 
 								AND NOT EXISTS (SELECT * FROM Resident WHERE Username = '$Username')";
 	$Is_Accepted = db()->numOfRows($query);
+	$Accepted = ($Is_Accepted ? 'Accepted' : 'Rejected');
 	echo "
 	<tr>
 		<td>$app[Name]</td>
@@ -59,8 +60,8 @@ foreach ($apps as $app) {
 		<td>$" . number_format($app['Monthly_Income']) . "</td>
 		<td>$app[Req_Cat]</td>
 		<td>$app[Pref_Move]</td>
-		<td>$app[Pref_Lease_Term]</td>
-		<td>$Is_Accepted</td>
+		<td>$app[Pref_Lease_Term] Months</td>
+		<td>$Accepted</td>
 		<td>
 			" . ($Is_Accepted ? 
 				'<input type="radio" name="username" value="' . $Username . '" />' : '') 
