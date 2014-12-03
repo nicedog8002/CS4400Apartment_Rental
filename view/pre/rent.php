@@ -102,7 +102,7 @@ db()->query($query0);
 db()->query($query1);
 db()->query($query2);
 $res = db()->fetch($query3);
-$Rent = $res['rent'];
+$Rent = intval($res['rent']);
 
 if (!$Rent) {
 	$_SESSION['notice'] = "You've already paid your rent for this month, 
@@ -142,7 +142,7 @@ if (!$Rent) {
 
 	// db() is a custom function written to abstract PHP queries
 	$query = "INSERT INTO Payment (Card_No, Month, Year, Apt_No, Date_of_Payment, Amount)
-						VALUES ('$Card_No', MONTH('$scheduleDate'), YEAR('$scheduleDate'), 
+						VALUES ('$Card_No', $Month, $Year, 
 							$Apt_No, '$scheduleDate', $Amount)";
 	if (db()->query($query)) {
 		$_SESSION['notice'] = "You've successfuly submitted your rent payment! ";
