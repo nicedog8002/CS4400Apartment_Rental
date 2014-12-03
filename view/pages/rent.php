@@ -1,5 +1,7 @@
 <?php 
-$scheduleDate = date('Y') . '-' . date('m') .  '' . '-' . date('d');
+global $Rent;
+
+$scheduleDate = date('Y-m-d');
 $query = "SELECT A.Rent AS Calculated_Rent, A.Apt_No, Card_No
 	FROM Apartment AS A, Resident AS R, Prospective_Resident AS PR, Payment_Information AS PI
 	WHERE R.Username = PR.Username 
@@ -90,7 +92,7 @@ $query = "SELECT A.Rent AS Calculated_Rent, A.Apt_No, Card_No
 			</tr>
 			<tr>
 				<th><label for="amount">Amount Due</label></th>
-				<td><input type="text" id="amount" name="amount" value="<?php echo $rent; ?>" /></td>
+				<td><input type="text" id="amount" name="amount" value="<?php echo $ent; ?>" /></td>
 			</tr>
 			<tr>
 				<th><label for="card">Use Card</label></th>
