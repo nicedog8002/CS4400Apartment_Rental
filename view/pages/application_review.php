@@ -39,17 +39,19 @@ $apps = db()->fetchMany($query);
 foreach ($apps as $app) {
 	$Username = $app['Username'];
 	$query = "SELECT Username 
-						FROM Prospective_Resident AS P
-							WHERE P.Username = '$Username'
-								AND (P.Pref_Move >= now()) 
-								AND (P.Pref_Move <= now() + INTERVAL 2 MONTH)
-								AND EXISTS (SELECT Apt_No FROM Apartment AS A 
-							WHERE A.Category = P.Req_Cat 
-								AND A.Available_On <= P.Pref_Move 
-								AND P.Monthly_Income >= 3*A.Rent 
-								AND P.Min_Rent <= A.Rent 
-								AND P.Max_Rent >= A.Rent) 
-								AND NOT EXISTS (SELECT * FROM Resident WHERE Username = '$Username')";
+			FROM Prospective_Resident AS P
+				WHERE P.Username = '$Username'
+					AND (P.Pref_Move >= now()) 
+					AND (P.Pref_Move <= now() + INTERVAL 2 MONTH)
+					AND EXISTS (SELECT Apt_No FROM Apartment AS A 
+				WHERE A.Category = P.Req_Cat 
+					AND A.Available_On <= P.Pref_Move 
+					AND P.Monthly_Income >= A.Rent*3
+					AND P.Min_Rent <= A.Rent 
+					AND P.Max_Rent >= A.Rent
+					AND P.Pref_Lease_Term >= A.Lease_Term
+					AND Apt_No NOT IN (SELECT Apt_No FROM cs4400.Resident)) 
+					AND NOT EXISTS (SELECT * FROM Resident WHERE Username = '$Username')";
 	$Is_Accepted = db()->numOfRows($query);
 	$Accepted = ($Is_Accepted ? 'Accepted' : 'Rejected');
 	echo "

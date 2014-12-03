@@ -105,8 +105,7 @@ $res = db()->fetch($query3);
 $Rent = intval($res['rent']);
 
 if (!$Rent) {
-	$_SESSION['notice'] = "You've already paid your rent for this month, 
-									but you're free to pay for future months. ";
+	$_SESSION['notice'] = "You've already paid your rent for this month. ";
 } else if ($_POST['submit']) {
 	if (!$Month || !$Year){
 		$_SESSION['error'] = "You must pick the date.";
