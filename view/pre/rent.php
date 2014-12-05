@@ -24,11 +24,9 @@ SELECT
 FROM
     Apartment AS A,
     Resident AS R,
-    Prospective_Resident AS PR,
-    Payment_Information AS PI
+    Prospective_Resident AS PR 
 WHERE
     R.Username = PR.Username
-        AND R.Username = PI.Username
         AND A.Apt_No = R.Apt_No
         AND R.Username = '$Username'
         AND DATE(NOW()) >= Pref_Move
@@ -55,11 +53,9 @@ UNION SELECT
 FROM
     Apartment AS A,
     Resident AS R,
-    Prospective_Resident AS PR,
-    Payment_Information AS PI
+    Prospective_Resident AS PR
 WHERE
-    R.Username = PR.Username
-        AND R.Username = PI.Username
+    R.Username = PR.Username 
         AND A.Apt_No = R.Apt_No
         AND R.Username = '$Username'
         AND DATE(NOW()) >= Pref_Move
@@ -79,11 +75,9 @@ UNION SELECT
 FROM
     Apartment AS A,
     Resident AS R,
-    Prospective_Resident AS PR,
-    Payment_Information AS PI
+    Prospective_Resident AS PR 
 WHERE
     R.Username = PR.Username
-        AND R.Username = PI.Username
         AND A.Apt_No = R.Apt_No
         AND R.Username = '$Username'
         AND DATE(NOW()) >= Pref_Move
@@ -105,8 +99,29 @@ $res = db()->fetch($query3);
 $Rent = intval($res['rent']);
 
 if (!$Rent) {
-	$_SESSION['notice'] = "You've already paid your rent for this month. ";
-} else if ($_POST['submit']) {
+	$query = "SELECT P.Pref_Move > DATE(NOW()) AS not_moved, P.Pref_Move 
+							FROM Prospective_Resident AS P 
+							WHERE P.Username = '$Username'";
+	$res = db()->fetch($query);
+	if ($res['not_moved']) {
+		$_SESSION['error'] = "You aren't moving in until $res[Pref_Move], so you don't owe any rent yet. ";
+	}
+	$_SESSION['notice'] = "You don't currently owe any rent for this month but you can pay for future months. ";
+	
+	$query = "SELECT 
+    A.Rent AS Rent
+    FROM
+	    Apartment AS A,
+	    Resident AS R,
+	    Prospective_Resident AS PR 
+		WHERE
+	    R.Username = PR.Username
+        AND A.Apt_No = R.Apt_No
+        AND R.Username = '$Username'";
+   $res = db()->fetch($query);
+   $Rent = $res['Rent'];
+} 
+if ($_POST['submit']) {
 	if (!$Month || !$Year){
 		$_SESSION['error'] = "You must pick the date.";
 		redirect('rent');
