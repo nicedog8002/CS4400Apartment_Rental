@@ -3,7 +3,7 @@
 Month
 <form method="post" action="rent_default_report">
      <select name="default_month">
-      <option value="0">month</option>
+      <option value="<?php echo date('n'); ?>"><?php echo date('F'); ?></option>
       <option value="1">January</option>
       <option value="2">February</option>
       <option value="3">March</option>
