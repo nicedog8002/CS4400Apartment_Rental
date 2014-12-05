@@ -99,19 +99,6 @@ $res = db()->fetch($query3);
 $Rent = intval($res['rent']);
 
 if (!$Rent) {
-	$query = "SELECT P.Pref_Move > DATE(NOW()) AS not_moved, P.Pref_Move 
-							FROM Prospective_Resident AS P 
-							WHERE P.Username = '$Username'";
-	$res = db()->fetch($query);
-	if ($res['not_moved']) {
-		$_SESSION['notice'] = "You aren't moving in until $res[Pref_Move], so you don't owe any rent yet. ";
-	}
-	$check = "SELECT Card_No FROM Payment WHERE Month = $Month 
-					AND Year = $Year AND Apt_No = $_SESSION[apt_no]";
-	if (db()->numOfRows($check) > 0) {
-		$_SESSION['notice'] = "You've already paid rent for this month, but you can still pay for future months. ";
-	}
-	
 	$query = "SELECT 
     A.Rent AS Rent
     FROM
@@ -125,6 +112,19 @@ if (!$Rent) {
    $res = db()->fetch($query);
    $Rent = $res['Rent'];
 
+	$query = "SELECT P.Pref_Move > DATE(NOW()) AS not_moved, P.Pref_Move 
+							FROM Prospective_Resident AS P 
+							WHERE P.Username = '$Username'";
+	$res = db()->fetch($query);
+	if ($res['not_moved']) {
+		$_SESSION['notice'] = "You aren't moving in until $res[Pref_Move], so you don't owe any rent yet. ";
+	}
+	$check = "SELECT Card_No FROM Payment WHERE Month = $Month 
+					AND Year = $Year AND Apt_No = $_SESSION[apt_no]";
+	if (db()->numOfRows($check) > 0) {
+		$_SESSION['notice'] = "You've already paid rent for this month, but you can still pay for future months. ";
+	} else {
+		// Calculate potential edge cases on rent
    $query = "SELECT 
    		Pref_Move, 
     	MONTH(Pref_Move) AS Month, 
@@ -147,6 +147,7 @@ if (!$Rent) {
    		$Rent = ((30 - $Pref_Move['Day']) / 30) * $Rent;
    	}
    }
+ }
 } 
 $Rent = round($Rent, 2);
 if ($_POST['submit']) {
