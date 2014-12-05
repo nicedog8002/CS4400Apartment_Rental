@@ -106,7 +106,6 @@ if (!$Rent) {
 	if ($res['not_moved']) {
 		$_SESSION['error'] = "You aren't moving in until $res[Pref_Move], so you don't owe any rent yet. ";
 	}
-
 	$check = "SELECT Card_No FROM Payment WHERE Month = $Month 
 					AND Year = $Year AND Apt_No = $_SESSION[apt_no]";
 	if (db()->numOfRows($check) > 0) {
@@ -125,6 +124,26 @@ if (!$Rent) {
         AND R.Username = '$Username'";
    $res = db()->fetch($query);
    $Rent = $res['Rent'];
+
+   $query = "SELECT 
+   		Pref_Move, 
+    	MONTH(Pref_Move) AS Month, 
+			YEAR(Pref_Move) AS Year, 
+			DAY(Pref_Move) AS Day
+    FROM
+	    Prospective_Resident 
+		WHERE
+	    Username = '$Username'";
+
+   if ($Pref_Move = db()->fetch($query)) {
+   	if ($Pref_Move['Month'] != $Month || $Pref_Move['Year'] != $Year) {
+   		$date = explode('-', $scheduleDate); // 0 => Year, 1 => Month, 2 => Day
+   		$Day = intval($date[2]);
+   		if ($Day > 3) {
+   			$Rent += ($Day - 3) * 50;
+   		}
+   	}
+   }
 } 
 if ($_POST['submit']) {
 	if (!$Month || !$Year){
