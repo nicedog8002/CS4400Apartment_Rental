@@ -136,12 +136,15 @@ if (!$Rent) {
 	    Username = '$Username'";
 
    if ($Pref_Move = db()->fetch($query)) {
-   	if ($Pref_Move['Month'] != $Month || $Pref_Move['Year'] != $Year) {
+   	if ($Pref_Move['Month'] != $Month || $Pref_Move['Year'] != $Year 
+   		|| $Pref_Move['Day'] <= 3) {
    		$date = explode('-', $scheduleDate); // 0 => Year, 1 => Month, 2 => Day
    		$Day = intval($date[2]);
    		if ($Day > 3) {
    			$Rent += ($Day - 3) * 50;
    		}
+   	} else if ($Pref_Move['Day'] > 7) {
+   		$Rent = ((30 - $Pref_Move['Day']) / 30) * $Rent;
    	}
    }
 } 
