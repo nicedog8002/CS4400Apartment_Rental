@@ -106,7 +106,12 @@ if (!$Rent) {
 	if ($res['not_moved']) {
 		$_SESSION['error'] = "You aren't moving in until $res[Pref_Move], so you don't owe any rent yet. ";
 	}
-	$_SESSION['notice'] = "You don't currently owe any rent for this month but you can pay for future months. ";
+
+	$check = "SELECT Card_No FROM Payment WHERE Month = $Month 
+					AND Year = $Year AND Apt_No = $_SESSION[apt_no]";
+	if (db()->numOfRows($check) > 0) {
+		$_SESSION['notice'] = "You've already paid rent for this month, but you can still pay for future months. ";
+	}
 	
 	$query = "SELECT 
     A.Rent AS Rent
@@ -160,8 +165,6 @@ if ($_POST['submit']) {
 							$Apt_No, '$scheduleDate', $Amount)";
 	if (db()->query($query)) {
 		$_SESSION['notice'] = "You've successfuly submitted your rent payment! ";
-		redirect('home');
-		exit; 
 	} else {
 		$_SESSION['error'] = "You've already paid rent for this month. ";
 		redirect('rent');
