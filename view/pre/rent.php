@@ -104,7 +104,7 @@ if (!$Rent) {
 							WHERE P.Username = '$Username'";
 	$res = db()->fetch($query);
 	if ($res['not_moved']) {
-		$_SESSION['error'] = "You aren't moving in until $res[Pref_Move], so you don't owe any rent yet. ";
+		$_SESSION['notice'] = "You aren't moving in until $res[Pref_Move], so you don't owe any rent yet. ";
 	}
 	$check = "SELECT Card_No FROM Payment WHERE Month = $Month 
 					AND Year = $Year AND Apt_No = $_SESSION[apt_no]";
@@ -148,6 +148,7 @@ if (!$Rent) {
    	}
    }
 } 
+$Rent = round($Rent, 2);
 if ($_POST['submit']) {
 	if (!$Month || !$Year){
 		$_SESSION['error'] = "You must pick the date.";
@@ -169,7 +170,7 @@ if ($_POST['submit']) {
 		$_SESSION['error'] = "You must enter your apartment number. ";
 		redirect('rent');
 		exit;
-	} else if ($Amount != $Rent) {
+	} else if (round($Amount, 2) != $Rent) {
 		$_SESSION['error'] = "You must pay the exact rent you owe. ";
 		redirect('rent');
 		exit;
